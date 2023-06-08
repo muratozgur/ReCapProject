@@ -21,14 +21,27 @@ namespace Business.Concrete
         {
             return _carDal.GetAll();
         }
-        public Car GetById(int wantedId)
+        public Car GetById(int Id)
         {
-            return _carDal.GetById(wantedId);
+            return _carDal.Get(c=>c.Id == Id);
+        }
+        public List<Car> GetCarsWithBrandId(int BrandId)
+        {
+            return _carDal.GetAll(c=>c.BrandId == BrandId);
         }
         public void Add(Car car)
         {
-            _carDal.Add(car);
-            Console.WriteLine("The car with " + car.Id + " ID added successfully");
+           if(car.Description.Length > 2 && car.DailyPrice > 0)
+            {
+                _carDal.Add(car);
+                Console.WriteLine("The car with " + car.Id + " ID added successfully");
+            }
+            else
+            {
+                throw new Exception("The length of the car name must be bigger than 2 letters\n" +
+                    "and daily price of car must be bigger than 0");
+            }
+            
         }
         public void Delete(Car car)
         {
