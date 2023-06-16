@@ -8,10 +8,12 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        GetAllCars();
-        GetCarsById();
-        GetCarsWithBrandId();
-        GetCarsByColorId();
+        //GetAllCars();
+        //GetCarsById();
+        //GetCarsWithBrandId();
+        //GetCarsByColorId();
+        //GetCarDetails();
+        //AddNewCar();
 
         static void GetCarsById()
         {
@@ -50,5 +52,20 @@ internal class Program
             }
         }
 
+    }
+
+    private static void AddNewCar()
+    {
+        CarManager carManager = new CarManager(new EfCarDal());
+        carManager.Add(new Car { BrandId = 1, ColorId = 3, DailyPrice = 2540, Description = "Top Level", ModelYear = 2023 });
+    }
+
+    private static void GetCarDetails()
+    {
+        CarManager carManager = new CarManager(new EfCarDal());
+        foreach (var car in carManager.GetCarDetails())
+        {
+            Console.WriteLine(car.BrandName + " / " + car.CarName + " / " + car.ColorName);
+        }
     }
 }

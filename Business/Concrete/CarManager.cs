@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Concrete.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,21 +18,9 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        public List<Car> GetAll()
-        {
-            return _carDal.GetAll();
-        }
-        public Car GetById(int Id)
-        {
-            return _carDal.Get(c=>c.Id == Id);
-        }
-        public List<Car> GetCarsWithBrandId(int BrandId)
-        {
-            return _carDal.GetAll(c=>c.BrandId == BrandId);
-        }
         public void Add(Car car)
         {
-           if(car.Description.Length > 2 && car.DailyPrice > 0)
+            if (car.Description.Length > 2 && car.DailyPrice > 0)
             {
                 _carDal.Add(car);
                 Console.WriteLine("The car with " + car.Id + " ID added successfully");
@@ -41,7 +30,6 @@ namespace Business.Concrete
                 throw new Exception("The length of the car name must be bigger than 2 letters\n" +
                     "and daily price of car must be bigger than 0");
             }
-            
         }
         public void Delete(Car car)
         {
@@ -51,6 +39,25 @@ namespace Business.Concrete
         public void Update(Car car)
         {
             _carDal.Update(car);
+        }
+        public List<Car> GetAll()
+        {
+            //business codes will be implemented
+           return _carDal.GetAll();
+        }
+        public List<Car> GetCarsWithBrandId(int brandId)
+        {
+            return _carDal.GetAll(c=> c.BrandId == brandId);
+        }
+
+        public Car GetById(int Id)
+        {
+            return _carDal.Get(c => c.Id == Id);
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails(); //extra method in ICarDal
         }
     }
 }
