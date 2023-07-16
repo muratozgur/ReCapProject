@@ -1,59 +1,90 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using Core.Utilities.Results;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
+using Entities.DTOs;
 
 internal class Program
 {
+    
     public static void Main(string[] args)
     {
         //GetAllCars();
         //GetCarsById();
         //GetCarsWithBrandId();
         //GetCarsByColorId();
-        //GetCarDetails();
+        GetCarDetails();
         //AddNewCar();
 
         static void GetCarsById()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            Console.WriteLine("The brand ID of the car with ID 1");
-            Console.WriteLine(carManager.GetById(1).BrandId);
+            IDataResult<Car> result = carManager.GetById(1);
+            if (result.Success)
+            {
+                Console.WriteLine(result);
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
         }
 
         static void GetCarsByColorId()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            Console.WriteLine("The cars with color 2 ID: ");
-            foreach (var cars in carManager.GetCarsWithBrandId(2))
+            IDataResult<List<Car>> result = carManager.GetCarsByColorId(2);
+            if (result.Success)
             {
-                Console.WriteLine(cars.Id);
+                foreach (var cars in result.Data)
+                {
+                    Console.WriteLine(cars.Id);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
         }
 
         static void GetAllCars()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            Console.WriteLine("All car IDs we own: ");
-            foreach (var cars in carManager.GetAll())
+            IDataResult<List<Car>> result = carManager.GetAll();
+
+            if (result.Success)
             {
-                Console.WriteLine(cars.Id);
+                foreach (var cars in result.Data)
+                {
+                    Console.WriteLine(cars.Id);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
         }
-
         static void GetCarsWithBrandId()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            Console.WriteLine("The model year of cars with Brand ID 2");
-            foreach (var cars in carManager.GetCarsWithBrandId(2))
+            IDataResult<List<Car>> result = carManager.GetCarsWithBrandId(2);
+
+            if (result.Success)
             {
-                Console.WriteLine(cars.ModelYear);
+                foreach (var cars in result.Data)
+                {
+                    Console.WriteLine(cars.ModelYear);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
         }
-
     }
-
     private static void AddNewCar()
     {
         CarManager carManager = new CarManager(new EfCarDal());
@@ -63,9 +94,19 @@ internal class Program
     private static void GetCarDetails()
     {
         CarManager carManager = new CarManager(new EfCarDal());
-        foreach (var car in carManager.GetCarDetails())
+
+        IDataResult<List<CarDetailDto>> result = carManager.GetCarDetails();
+
+        if (result.Success)
         {
-            Console.WriteLine(car.BrandName + " / " + car.CarName + " / " + car.ColorName);
+            foreach (var car in result.Data)
+            {
+                Console.WriteLine(car.CarName + "/" + car.BrandName);
+            }
+        }
+        else
+        {
+            Console.WriteLine(result.Message);
         }
     }
 }
