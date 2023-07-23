@@ -9,10 +9,22 @@ namespace Business.Constants
 {
     public static class Messages
     {
+        public static string Added = "Added";
+        public static string Deleted = "Deleted";
+        public static string Updated = "Updated";
+        public static string Listed = "Listed";
         public static string CarAdded = "Car added";
+        public static string RentalAdded = "Rental added";
+        public static string RentalUpdated = "Rental updated";
+        public static string RentalDeleted = "Rental deleted";
+        public static string RentalsListed = "Rentals listed";
+        public static string RentalReturnDateNull = "Return date must be given";
         public static string CarNameInvalid = "Car name is invalid";
-        internal static string MaintenanceTime = "System in maintenance";
-        internal static string CarsListed = "Cars listed";
-        internal static string ColorsListed = "Colors listed";
+        public static string MaintenanceTime = "System in maintenance";
+        public static string CarsListed = "Cars listed";
+        public static string ColorsListed = "Colors listed";
+        public static string CarDeleted = "Car deleted";
+        public static string CarUpdated = "Car updated";
+        
     }
 }

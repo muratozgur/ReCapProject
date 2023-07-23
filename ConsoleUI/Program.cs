@@ -12,16 +12,24 @@ internal class Program
     public static void Main(string[] args)
     {
         //GetAllCars();
-        //GetCarsById();
+        //GetCarsById(1);
         //GetCarsWithBrandId();
         //GetCarsByColorId();
-        GetCarDetails();
+        //GetCarDetails();
         //AddNewCar();
 
-        static void GetCarsById()
+        AddCustomer(new Customer() {UserId = 1, CompanyName = "Çağlayan A.Ş."});
+
+        static void AddCustomer(Customer customer)
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            customerManager.Add(customer);
+        }
+
+        static void GetCarsById(int id)
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            IDataResult<Car> result = carManager.GetById(1);
+            IDataResult<Car> result = carManager.GetById(id);
             if (result.Success)
             {
                 Console.WriteLine(result);

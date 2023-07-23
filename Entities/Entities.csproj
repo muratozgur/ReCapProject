@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Abstract\" />
-    <Folder Include="Concrete\DTOs\" />
   </ItemGroup>
 
   <ItemGroup>
