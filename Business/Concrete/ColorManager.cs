@@ -21,6 +21,13 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
+        public IResult Add(Color color)
+        {
+
+            _colorDal.Add(color);
+            return new SuccessResult(Messages.Added);
+        }
+
         public IDataResult<List<Color>> GetAll()
         {
             if (DateTime.Now.Hour == 22)

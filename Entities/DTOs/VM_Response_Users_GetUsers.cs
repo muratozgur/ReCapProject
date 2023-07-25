@@ -1,13 +1,12 @@
-﻿using Core.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concrete
+namespace Entities.DTOs
 {
-    public class User : IEntity
+    public class VM_Response_Users_GetUsers
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
