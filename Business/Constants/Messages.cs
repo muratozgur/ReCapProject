@@ -25,6 +25,7 @@ namespace Business.Constants
         public static string ColorsListed = "Colors listed";
         public static string CarDeleted = "Car deleted";
         public static string CarUpdated = "Car updated";
-        
+        public static string CarImageLimitExceeded = "Car image limit has been exceeded, new car image can not be added";
+        public static string ImageAddedSuccessfully = "Car image has been added successfully";
     }
 }
