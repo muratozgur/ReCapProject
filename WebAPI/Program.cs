@@ -40,9 +40,9 @@ ServiceTool.Create(builder.Services);// day 14 end
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Autofac implemented to the IoC
+////Autofac implemented to the IoC
 //builder.Services.AddSingleton<IUserService, UserManager>();
-//builder.Services.AddSingleton<IUserDal, EfUserDal>();x
+//builder.Services.AddSingleton<IUserDal, EfUserDal>();
 //builder.Services.AddSingleton<ICustomerService, CustomerManager>();
 //builder.Services.AddSingleton<ICustomerDal, EfCustomerDal>();
 //builder.Services.AddSingleton<ICarService, CarManager>();
