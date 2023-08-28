@@ -1,4 +1,5 @@
-﻿using Core.Utilities.Results;
+﻿using Core.Entities.Concrete;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
@@ -14,8 +15,10 @@ namespace Business.Abstract
         IResult Add(User user);
         IResult Update(User user);
         IResult Delete(User user);
+        IDataResult<List<OperationClaim>> GetClaims(User user);
         IDataResult<List<User>> GetAll();
         IDataResult<List<VM_Response_Users_GetUsers>> GetUsers(VM_Request_Users_GetUsers requestModel);//Allows WebAPI to find users with any property parameter
         IDataResult<User> GetById(int id);
+        IDataResult<User> GetByMail(string email);
     }
 }

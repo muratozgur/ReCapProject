@@ -4,6 +4,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -52,7 +53,7 @@ namespace Business.Concrete
         }
         
         public IDataResult<List<VM_Response_Users_GetUsers>> GetUsers(VM_Request_Users_GetUsers requestModel)
-        {//Allows WebAPI to find users with any property parameter
+        {//Allows WebAPI to find users with any property parameter, with just a single method
             if (!requestModel.Id.HasValue && requestModel.FirstName.IsNullOrEmpty() &&
                 requestModel.LastName.IsNullOrEmpty() && requestModel.Email.IsNullOrEmpty())
             {//if there is no any input
@@ -74,7 +75,7 @@ namespace Business.Concrete
                 FirstName = u.FirstName,
                 LastName = u.LastName,
                 Email = u.Email,
-                Password = u.Password,
+                //Password = u.Password,
             }).ToList();
             return new SuccessDataResult<List<VM_Response_Users_GetUsers>>(response, "Users retrieved successfully.");
         }
@@ -82,6 +83,16 @@ namespace Business.Concrete
         public IDataResult<User> GetById(int id)
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id.Equals(id)));
+        }
+
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
+        }
+
+        public IDataResult<User> GetByMail(string email)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
         }
     }
 }

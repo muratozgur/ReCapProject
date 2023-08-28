@@ -7,12 +7,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Utilities\Security\JWT\**" />
+    <EmbeddedResource Remove="Utilities\Security\JWT\**" />
+    <None Remove="Utilities\Security\JWT\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Utilities\Security\JWT\AccessToken.cs" />
+    <Compile Include="Utilities\Security\JWT\ITokenHelper.cs" />
+    <Compile Include="Utilities\Security\JWT\JwtHelper.cs" />
+    <Compile Include="Utilities\Security\JWT\TokenOptions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="7.0.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
     <PackageReference Include="FluentValidation" Version="11.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
   </ItemGroup>
 
 </Project>

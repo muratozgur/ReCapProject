@@ -1,4 +1,5 @@
-﻿using Business.Constants;
+﻿using Business.Abstract;
+using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class BrandManager
+    public class BrandManager : IBrandService
     {
         IBrandDal _brandDal;
         public BrandManager(IBrandDal brandDal)
