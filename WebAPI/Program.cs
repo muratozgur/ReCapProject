@@ -9,12 +9,17 @@ using Core.Utilities.Security.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Core.Utilities.IoC;
 using Microsoft.IdentityModel.Tokens;
+using Core.DependencyResolvers;
+using Core.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
 
 //Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
@@ -35,10 +40,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         IssuerSigningKey = Core.Utilities.Security.Encryption.SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
-ServiceTool.Create(builder.Services);// day 14 end
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddDependencyResolvers(new ICoreModule[]{
+    new CoreModule()
+});
+
+ServiceTool.Create(builder.Services);// day 14 end
 
 ////Autofac implemented to the IoC
 //builder.Services.AddSingleton<IUserService, UserManager>();
@@ -72,6 +79,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseAuthentication();
 
 app.MapControllers();
 

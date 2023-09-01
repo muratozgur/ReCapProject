@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Business.BusinessAspects.Autofac
 {
@@ -31,7 +32,16 @@ namespace Business.BusinessAspects.Autofac
             var roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
             foreach (var role in _roles)
             {
-                if (roleClaims.Contains(role))
+                //if (roleClaims.Contains(role)) // bu statement bende false dönüyor, sebebi bulunamadı
+                //{
+                //    return;
+                //}
+
+                //if (roleClaims.AsQueryable().SingleOrDefault(r => r == role) != null)
+                //{
+                //    return;
+                //}
+                if (roleClaims.AsQueryable().SingleOrDefault(r => r == role).IsNullOrEmpty())
                 {
                     return;
                 }
